@@ -1,0 +1,516 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-main: #0B0D0F;
+  --color-bg-secondary: #121519;
+  --color-bg-surface: #191E23;
+  --color-bg-surface-elevated: #222830;
+  --color-accent-lime: #C6FF4D;
+  --color-accent-violet: #A78BFA;
+  --color-text-main: #F4F5F2;
+  --color-text-muted: #A0A7AF;
+  --color-text-subtle: #636D78;
+  --color-border-dark: #2A3036;
+  --color-border-glow: #3E4752;
+  --color-success: #74E3A1;
+  --color-warning: #FBBF24;
+  --color-danger: #F87171;
+
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Custom base & utility styling */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #0B0D0F;
+  color: #F4F5F2;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0D0F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A3036;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3E4752;
+}
+
+/* Subtle neo-cyberpunk grid pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(42, 48, 54, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(42, 48, 54, 0.25) 1px, transparent 1px);
+}
+
+.bg-dot-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(198, 255, 77, 0.12) 1px, transparent 1px);
+}
+
+/* Scanning line animation */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+.animate-scan {
+  animation: scanline 4s linear infinite;
+}
+
+/* Glow effects */
+.glow-lime {
+  box-shadow: 0 0 25px -5px rgba(198, 255, 77, 0.25);
+}
+
+.glow-lime-sm {
+  box-shadow: 0 0 15px -3px rgba(198, 255, 77, 0.3);
+}
+
+.glow-violet {
+  box-shadow: 0 0 25px -5px rgba(167, 139, 250, 0.25);
+}
+
+.text-glow-lime {
+  text-shadow: 0 0 16px rgba(198, 255, 77, 0.4);
+}
+
+/* Marquee infinite scroll */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+    transform: none;
+  }
+  .animate-scan {
+    animation: none;
+  }
+}
+
+/* Pulse animation for active QA nodes */
+@keyframes radar-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(198, 255, 77, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(198, 255, 77, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(198, 255, 77, 0);
+  }
+}
+
+.pulse-radar {
+  animation: radar-pulse 2s infinite;
+}
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES (Activates on html.light without altering dark mode)
+   ========================================================================== */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* Main background & canvas */
+html.light .bg-\[\#0B0D0F\] {
+  background-color: #F8FAFC !important;
+}
+html.light .bg-\[\#08090B\] {
+  background-color: #F1F5F9 !important;
+}
+
+/* Elevated card surfaces */
+html.light .bg-\[\#121519\] {
+  background-color: #FFFFFF !important;
+}
+html.light .bg-\[\#0E1114\] {
+  background-color: #FFFFFF !important;
+}
+html.light .bg-\[\#15191E\] {
+  background-color: #F8FAFC !important;
+}
+html.light .bg-\[\#191E23\] {
+  background-color: #F1F5F9 !important;
+}
+html.light .bg-\[\#222830\] {
+  background-color: #E2E8F0 !important;
+}
+
+/* Translucent surfaces */
+html.light .bg-\[\#0B0D0F\]\/85,
+html.light .bg-\[\#0B0D0F\]\/90,
+html.light .bg-\[\#0B0D0F\]\/95 {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+html.light .bg-\[\#121519\]\/70,
+html.light .bg-\[\#121519\]\/90 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Borders */
+html.light .border-\[\#2A3036\],
+html.light .border-\[\#2A3036\]\/60,
+html.light .border-\[\#2A3036\]\/70 {
+  border-color: #E2E8F0 !important;
+}
+html.light .border-\[\#3E4752\] {
+  border-color: #CBD5E1 !important;
+}
+
+/* Text colors */
+html.light .text-\[\#F4F5F2\],
+html.light .text-\[\#F4F5F2\]\/90 {
+  color: #0F172A !important;
+}
+html.light .text-\[\#A0A7AF\] {
+  color: #475569 !important;
+}
+html.light .text-\[\#636D78\],
+html.light .text-\[\#6C7480\] {
+  color: #64748B !important;
+}
+html.light .text-\[\#3E4752\] {
+  color: #94A3B8 !important;
+}
+
+/* High-contrast accessible accents for light theme */
+html.light .text-\[\#C6FF4D\] {
+  color: #3F6212 !important; /* deep accessible olive/lime text */
+}
+html.light .text-\[\#A78BFA\] {
+  color: #6D28D9 !important; /* accessible violet text */
+}
+html.light .text-\[\#74E3A1\] {
+  color: #047857 !important; /* accessible emerald text */
+}
+
+/* Preserve dark text on lime action buttons */
+html.light .bg-\[\#C6FF4D\],
+html.light .bg-\[\#b8f53a\] {
+  background-color: #C6FF4D !important;
+}
+html.light .bg-\[\#C6FF4D\] span,
+html.light .bg-\[\#C6FF4D\] svg,
+html.light .text-\[\#0B0D0F\] {
+  color: #0B0D0F !important;
+}
+
+/* Light mode grid pattern */
+html.light .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(203, 213, 225, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(203, 213, 225, 0.5) 1px, transparent 1px) !important;
+}
+
+/* Light mode scrollbar */
+html.light ::-webkit-scrollbar-track {
+  background: #F8FAFC !important;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #CBD5E1 !important;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8 !important;
+}
+
+/* Light mode subtle card shadows */
+html.light .group.border-\[\#2A3036\] {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   LIGHT THEME HOVER & INTERACTION OVERRIDES
+   Ensures text and interactive elements remain high-contrast and legible
+   when hovered in light mode.
+   ========================================================================== */
+
+/* Hover text colors */
+html.light .hover\:text-\[\#F4F5F2\]:hover {
+  color: #0F172A !important;
+}
+
+html.light .hover\:text-\[\#C6FF4D\]:hover {
+  color: #3F6212 !important;
+}
+
+/* Group-hover text colors */
+html.light .group-hover\:text-\[\#F4F5F2\]:is(:where(.group):hover *),
+html.light .group:hover .group-hover\:text-\[\#F4F5F2\] {
+  color: #0F172A !important;
+}
+
+html.light .group-hover\:text-\[\#C6FF4D\]:is(:where(.group):hover *),
+html.light .group:hover .group-hover\:text-\[\#C6FF4D\] {
+  color: #3F6212 !important;
+}
+
+/* Hover background colors */
+html.light .hover\:bg-\[\#121519\]:hover,
+html.light .hover\:bg-\[\#15191E\]:hover {
+  background-color: #F1F5F9 !important;
+}
+
+html.light .hover\:bg-\[\#191E23\]:hover {
+  background-color: #E2E8F0 !important;
+}
+
+html.light .hover\:bg-\[\#222830\]:hover {
+  background-color: #CBD5E1 !important;
+}
+
+/* Hover borders */
+html.light .hover\:border-\[\#3E4752\]:hover {
+  border-color: #94A3B8 !important;
+}
+
+html.light .hover\:border-\[\#C6FF4D\]:hover,
+html.light .hover\:border-\[\#C6FF4D\]\/40:hover,
+html.light .hover\:border-\[\#C6FF4D\]\/50:hover,
+html.light .hover\:border-\[\#C6FF4D\]\/60:hover {
+  border-color: #65A30D !important;
+}
+
+html.light .hover\:border-\[\#A78BFA\]\/50:hover {
+  border-color: #7C3AED !important;
+}
+
+/* Group-hover borders */
+html.light .group-hover\:border-\[\#C6FF4D\]:is(:where(.group):hover *),
+html.light .group-hover\:border-\[\#C6FF4D\]\/40:is(:where(.group):hover *),
+html.light .group-hover\:border-\[\#C6FF4D\]\/50:is(:where(.group):hover *),
+html.light .group:hover .group-hover\:border-\[\#C6FF4D\],
+html.light .group:hover .group-hover\:border-\[\#C6FF4D\]\/40,
+html.light .group:hover .group-hover\:border-\[\#C6FF4D\]\/50 {
+  border-color: #65A30D !important;
+}
+
+/* Light header shadow subtle refinement */
+html.light header.shadow-2xl {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ==========================================================================
+   PRINT / PDF RESUME STYLING
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 20mm 14mm 20mm 14mm;
+    size: A4 portrait;
+  }
+
+  html, body {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide entire website chrome, navigation, footer, HUD */
+  #main-content,
+  header,
+  footer,
+  nav,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  #root,
+  #root > div {
+    min-height: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Reset fixed modal overlay to standard flowing print block */
+  .resume-modal-overlay {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    z-index: auto !important;
+  }
+
+  .resume-modal-container {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    animation: none !important;
+  }
+
+  .resume-printable-document {
+    max-width: 100% !important;
+    padding-top: 2pt !important;
+    padding-bottom: 14pt !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    color: #111827 !important;
+    background: #ffffff !important;
+    border: none !important;
+  }
+
+  .resume-header-block {
+    padding-bottom: 12pt !important;
+    margin-bottom: 14pt !important;
+    border-bottom: 1.5pt solid #111827 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Crisp high-contrast print typography */
+  .resume-printable-document * {
+    color: #111827 !important;
+    border-color: #D1D5DB !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  .resume-printable-document h1 {
+    color: #000000 !important;
+    font-size: 20pt !important;
+    line-height: 1.1 !important;
+    margin-bottom: 2pt !important;
+  }
+
+  .resume-printable-document h2 {
+    color: #000000 !important;
+    font-size: 10.5pt !important;
+    font-weight: 700 !important;
+    border-bottom: 1.5pt solid #111827 !important;
+    padding-bottom: 2pt !important;
+    margin-top: 12pt !important;
+    margin-bottom: 6pt !important;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .resume-printable-document h3 {
+    color: #111827 !important;
+    font-size: 10pt !important;
+    font-weight: 700 !important;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .resume-printable-document p,
+  .resume-printable-document li,
+  .resume-printable-document span {
+    color: #374151 !important;
+    font-size: 9pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .resume-printable-document [class*="text-[#C6FF4D]"] {
+    color: #15803D !important;
+    font-weight: 600 !important;
+  }
+
+  .resume-printable-document [class*="text-[#74E3A1]"] {
+    color: #047857 !important;
+    font-weight: 600 !important;
+  }
+
+  .resume-printable-document [class*="text-[#A78BFA]"] {
+    color: #6D28D9 !important;
+    font-weight: 600 !important;
+  }
+
+  .resume-printable-document [class*="text-[#FBBF24]"] {
+    color: #B45309 !important;
+    font-weight: 600 !important;
+  }
+
+  .resume-printable-document [class*="bg-[#121519]"],
+  .resume-printable-document [class*="bg-[#191E23]"],
+  .resume-printable-document [class*="bg-[#0B0D0F]"] {
+    background: #F9FAFB !important;
+    border: 1px solid #E5E7EB !important;
+  }
+
+  .resume-printable-document a {
+    text-decoration: underline !important;
+    color: #1D4ED8 !important;
+  }
+
+  /* Prevent page breaks inside atomic items */
+  .resume-item-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 6pt !important;
+  }
+}
